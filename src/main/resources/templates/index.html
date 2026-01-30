@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Meu LinkTree</title>
+    <style>
+        body { font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; text-align: center; }
+        .card { border: 1px solid #ccc; padding: 10px; margin: 10px 0; border-radius: 8px; background-color: #f9f9f9; }
+        input { padding: 10px; margin: 5px; width: 80%; }
+        button { padding: 10px 20px; background-color: #28a745; color: white; border: none; cursor: pointer; }
+        a { text-decoration: none; color: #333; font-weight: bold; font-size: 1.2rem; display: block; }
+    </style>
+</head>
+<body>
+
+<h1>🌳 Meu LinkTree Java</h1>
+
+<div style="margin-bottom: 40px; border-bottom: 2px solid #eee; padding-bottom: 20px;">
+    <h3>Adicionar Novo Link</h3>
+    <form action="/add" method="post">
+        <input type="text" name="titulo" placeholder="Título (ex: LinkedIn)" required>
+        <input type="text" name="url" placeholder="URL (ex: https://...)" required>
+        <button type="submit">Salvar Link</button>
+    </form>
+</div>
+
+<div>
+    <div th:each="link : ${links}" class="card">
+        <a th:href="${link.url}" target="_blank">
+            <span th:text="${link.titulo}">Título do Link</span>
+        </a>
+    </div>
+
+    <p th:if="${links.empty}">Nenhum link cadastrado ainda.</p>
+</div>
+
+</body>
+</html>
