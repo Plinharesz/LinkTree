@@ -1,16 +1,12 @@
-# 1. Usar uma imagem base que já tenha Java 17 e Maven instalados
-FROM maven:3.8.5-openjdk-17
+# 1. Usamos uma imagem mais moderna com Java 21
+FROM maven:3.9.6-eclipse-temurin-21
 
-# 2. Define a pasta de trabalho dentro do servidor
 WORKDIR /app
 
-# 3. Copia todos os seus arquivos para dentro do servidor
 COPY . .
 
-# 4. Roda o comando de construção (o mesmo que tentamos antes)
-# O "-DskipTests" é para ser mais rápido e não falhar se tiver teste pendente
+# Compila o projeto
 RUN mvn clean package -DskipTests
 
-# 5. O comando final que inicia o site
-# Ele procura qualquer arquivo .jar dentro da pasta target e executa
-CMD java -jar target/*.jar
+# Inicia a aplicação
+CMD ["java", "-jar", "target/linktree-0.0.1-SNAPSHOT.jar"]
